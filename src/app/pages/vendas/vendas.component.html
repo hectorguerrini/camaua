@@ -1,0 +1,72 @@
+<div class="vendas">
+  <div class="row">
+    <div class="col-md-3">
+      <button class="btn" [ngClass]="{'btn-primary': tipoVenda == 'aluno','btn-outline-primary': tipoVenda != 'aluno' }"
+        (click)="tipoVenda = 'aluno'">Aluno</button>
+      <button class="btn"
+        [ngClass]="{'btn-primary': tipoVenda == 'convidado','btn-outline-primary': tipoVenda != 'convidado' }"
+        (click)="tipoVenda = 'convidado'">Convidado</button>
+
+    </div>
+    <div class="col-md-8">
+      <input type="text" placeholder="R.A" class="form-control" [(ngModel)]="RA" *ngIf="tipoVenda == 'aluno'">
+      <input type="text" placeholder="CPF" class="form-control" [(ngModel)]="CPF" *ngIf="tipoVenda == 'convidado'">
+    </div>
+    <div class="col-md-1">
+      <button class="btn btn-outline-primary"><i class="fa fa-search"></i></button>
+    </div>
+
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <label class="nome">Diurno - Hector Guerrini</label>
+    </div>
+    <div class="col-md-5">
+      <label class="label">Genero:</label>
+      <button class="btn" [ngClass]="{'btn-primary': sexo == 'masculino','btn-outline-primary': sexo != 'masculino' }"
+        (click)="sexo = 'masculino'">Masculino</button>
+      <button class="btn" [ngClass]="{'btn-danger': sexo == 'feminino','btn-outline-danger': sexo != 'feminino' }"
+        (click)="sexo = 'feminino'">Feminino</button>
+    </div>
+    <div class="col-md-5 btn-group">
+      <label class="label">Lote:</label>
+      <button class="btn" [ngClass]="{'btn-primary': lote == 1,'btn-outline-primary': lote != 1 }" (click)="lote = 1">1°
+        Lote</button>
+      <button class="btn" [ngClass]="{'btn-primary': lote == 2,'btn-outline-primary': lote != 2 }" (click)="lote = 2">2°
+        Lote</button>
+      <button class="btn" [ngClass]="{'btn-primary': lote == 3,'btn-outline-primary': lote != 3 }" (click)="lote = 3">3°
+        Lote</button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <label class="nome">Opcionais</label>
+    </div>
+    <div class="col-md-5">
+      <label class="label">Alimento:</label>
+      <button class="btn" [ngClass]="{'btn-primary': alimento == 1,'btn-outline-primary': alimento != 1 }"
+        (click)="alimento = 1">Sim</button>
+      <button class="btn" [ngClass]="{'btn-danger': alimento == 0,'btn-outline-danger': alimento != 0 }"
+        (click)="alimento = 0">Não</button>
+    </div>
+    <div class="col-md-7 input-group">
+
+
+      <label class="label">Combo:</label>
+      <button class="btn" [ngClass]="{'btn-primary': combo == 1,'btn-outline-primary': combo != 1 }"
+        (click)="combo = 1">Sim</button>
+      <button class="btn" [ngClass]="{'btn-danger': combo == 0,'btn-outline-danger': combo != 0 }"
+        (click)="combo = 0">Não</button>
+
+      <input type="text" class="form-control" *ngIf="combo == 1" placeholder="Número Ingresso" [(ngModel)]="numeroIngresso">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <label class="nome">Valor: {{valorFinal() | currency:'BRL'}}</label>
+    </div>
+    <div class="col-md-12">
+      <button class="btn btn-success">Finalizar Venda</button>
+    </div>
+  </div>
+</div>
