@@ -1,3 +1,10 @@
+<div class="header-vendas">
+  <div class="row">
+    <label class="nome">{{nomeFesta}}</label>
+  </div>
+
+</div>
+
 <div class="vendas">
   <div class="row">
     <div class="col-md-3">
@@ -9,17 +16,20 @@
 
     </div>
     <div class="col-md-8">
-      <input type="text" placeholder="R.A" class="form-control" [(ngModel)]="RA" *ngIf="tipoVenda == 'aluno'">
+      <input type="text" placeholder="R.A" class="form-control" (keyup.enter)="getAluno()" [(ngModel)]="RA" *ngIf="tipoVenda == 'aluno'">
       <input type="text" placeholder="CPF" class="form-control" [(ngModel)]="CPF" *ngIf="tipoVenda == 'convidado'">
     </div>
     <div class="col-md-1">
-      <button class="btn btn-outline-primary"><i class="fa fa-search"></i></button>
+      <button class="btn btn-outline-primary"(click)="getAluno()" *ngIf="tipoVenda === 'aluno'"><i class="fa fa-search"></i></button>
     </div>
 
   </div>
-  <div class="row">
-    <div class="col-md-12">
-      <label class="nome">Diurno - Hector Guerrini</label>
+  <div class="row" *ngIf="id_aluno || tipoVenda === 'convidado'">
+    <div class="col-md-12" *ngIf="tipoVenda === 'aluno'">
+      <label class="nome">{{periodo}} - {{nome}}</label>
+    </div>
+    <div class="col-md-12"  *ngIf="tipoVenda === 'convidado'" style="margin-bottom: 5px;">
+      <input type="text" placeholder="Nome do Convidado" [(ngModel)]="nomeConvidado" class="form-control">
     </div>
     <div class="col-md-5">
       <label class="label">Genero:</label>
@@ -38,7 +48,7 @@
         Lote</button>
     </div>
   </div>
-  <div class="row">
+  <div class="row" *ngIf="id_aluno || tipoVenda === 'convidado'">
     <div class="col-md-12">
       <label class="nome">Opcionais</label>
     </div>
@@ -61,12 +71,12 @@
       <input type="text" class="form-control" *ngIf="combo == 1" placeholder="Número Ingresso" [(ngModel)]="numeroIngresso">
     </div>
   </div>
-  <div class="row">
+  <div class="row" *ngIf="id_aluno || tipoVenda === 'convidado'">
     <div class="col-md-12">
       <label class="nome">Valor: {{valorFinal() | currency:'BRL'}}</label>
     </div>
     <div class="col-md-12">
-      <button class="btn btn-success">Finalizar Venda</button>
+      <button class="btn btn-success" (click)="finalizarVenda()">Finalizar Venda</button>
     </div>
   </div>
 </div>

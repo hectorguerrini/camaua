@@ -1,3 +1,16 @@
+.header-vendas{
+  box-shadow: 2px -1px 20px #888888;
+  border-radius: 10px;
+  max-width: 70vw;
+  width: 100%;
+  margin: auto;
+  margin-top: 5vh;
+  padding: 2%;
+  .nome{
+    font-size: 24px;
+  }
+}
+
 .vendas{
   box-shadow: 2px -1px 20px #888888;
   border-radius: 10px;
