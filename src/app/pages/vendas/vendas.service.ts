@@ -10,8 +10,21 @@ export class VendasService {
 
   getFesta() {
     const url = `${this.url}/get_festa`;
-    
+
     return this.http.post(url, {}, {
+      headers: new HttpHeaders().set(
+        'Content-Type',
+        'application/json'
+      )
+    });
+  }
+  getLista(id_festa: number, id_vendedor: number) {
+    const url = `${this.url}/get_lista`;
+    var body = {
+      id_festa: id_festa,
+      id_vendedor: id_vendedor
+    }
+    return this.http.post(url, body, {
       headers: new HttpHeaders().set(
         'Content-Type',
         'application/json'
@@ -45,7 +58,7 @@ export class VendasService {
   updateVendaConvidado(
     id_festa: number, id_vendedor: number, valor: number,
     sexo: string, alimento: number, cpf: string,
-    lote: number, combo: number, nome: string, 
+    lote: number, combo: number, nome: string,
     numeroIngresso: string
   ) {
   const url = `${this.url}/update_venda_convidado`;
