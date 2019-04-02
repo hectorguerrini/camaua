@@ -67,7 +67,7 @@ export class VendasComponent implements OnInit {
       this.vendasService.updateVendaConvidado(
         this.id_festa, 1, valor, this.sexo,
         this.alimento, this.CPF, this.lote,
-        this.combo, this.nomeConvidado, this.nomeConvidado
+        this.combo, this.nomeConvidado, this.numeroIngresso
       ).subscribe((data: {jsonRetorno: Array<any>}) => {
         if(data.jsonRetorno.length > 0){
           this.zerarCampos();
