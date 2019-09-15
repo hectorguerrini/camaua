@@ -10,12 +10,14 @@ import { LoginComponent } from './pages/login/login.component';
 import { MessageComponent } from './dialog/message/message.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatDialogModule} from '@angular/material/dialog';
+import { SystemComponent } from './dialog/system/system.component';
 @NgModule({
   declarations: [
     AppComponent,
     VendasComponent,
     LoginComponent,
-    MessageComponent
+    MessageComponent,
+    SystemComponent
   ],
   imports: [
     BrowserModule,
@@ -27,6 +29,6 @@ import {MatDialogModule} from '@angular/material/dialog';
   ],
   providers: [],
   bootstrap: [AppComponent],
-  entryComponents: [MessageComponent]
+  entryComponents: [MessageComponent, SystemComponent]
 })
 export class AppModule { }

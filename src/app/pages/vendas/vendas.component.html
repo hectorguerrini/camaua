@@ -1,13 +1,36 @@
 <div class="header-vendas">
-  <div class="row title">
-      <label class="nome">{{nomeFesta}} - {{nomeVendedor}}</label>
+  <!-- <div class="row title">
+    <label class="nome">{{nomeFesta}} - {{nomeVendedor}}</label>
+  </div> -->
+  <div class="logout">
+    <button class="btn btn-light" (click)="signOut()">Logout</button>
+    
   </div>
-  <div class="row">
+  <table class="table">
+    <thead>
+      <th>Lotes</th>
+      <th class="text-center">Aluno Pista</th>
+      <th class="text-center">Aluno Alimento</th>
+      <th class="text-center">Convidado Pista</th>
+      <th class="text-center">Convidado Alimento</th>      
+      
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of nLotes">
+        <td>{{item.lote}}º Lote</td>
+        <td class="text-center">{{item.aluno_pista}}</td>
+        <td class="text-center">{{item.aluno_alimento}}</td>
+        <td class="text-center">{{item.convidado_pista}}</td>
+        <td class="text-center">{{item.convidado_alimento}}</td>                
+      </tr>      
+    </tbody>
+  </table>
+  <!-- <div class="row">
     <div class="col-md-3"><label >Total: {{nConvite}}</label></div>
     <div class="col-md-3"><label >Combo + Alimento: {{nAlimentoCombo}}</label></div>
     <div class="col-md-3"><label >Só Combo: {{nCombo}}</label></div>
     <div class="col-md-3"><label >Só Alimento: {{nAlimento}}</label></div>
-  </div>
+  </div> -->
 
 </div>
 
@@ -22,11 +45,16 @@
 
     </div>
     <div class="col-md-8">
-      <input type="text" placeholder="R.A" class="form-control" (keyup.enter)="getAluno()" [(ngModel)]="RA" *ngIf="tipoVenda == 'aluno'">
+      <input type="text" placeholder="R.A" class="form-control" (keyup.enter)="getAluno()" [(ngModel)]="RA"
+        *ngIf="tipoVenda == 'aluno'">
       <input type="text" placeholder="CPF" class="form-control" [(ngModel)]="CPF" *ngIf="tipoVenda == 'convidado'">
     </div>
     <div class="col-md-1">
-      <button class="btn btn-outline-primary"(click)="getAluno()" *ngIf="tipoVenda === 'aluno'"><i class="fa fa-search"></i></button>
+      <button class="btn btn-outline-primary" (click)="getAluno()" *ngIf="tipoVenda === 'aluno'"><i
+          class="fa fa-search"></i></button>
+      <button class="btn btn-outline-primary" (click)="CPF = cpfAnterior" *ngIf="tipoVenda === 'convidado' && cpfAnterior"><i
+          class="fa fa-repeat"></i></button>
+        
     </div>
 
   </div>
@@ -34,7 +62,7 @@
     <div class="col-md-12" *ngIf="tipoVenda === 'aluno'">
       <label class="nome">{{periodo}} - {{nome}}</label>
     </div>
-    <div class="col-md-12"  *ngIf="tipoVenda === 'convidado'" style="margin-bottom: 5px;">
+    <div class="col-md-12" *ngIf="tipoVenda === 'convidado'" style="margin-bottom: 5px;">
       <input type="text" placeholder="Nome do Convidado" [(ngModel)]="nomeConvidado" class="form-control">
     </div>
     <div class="col-md-5">
@@ -58,13 +86,21 @@
     <div class="col-md-12">
       <label class="nome">Opcionais</label>
     </div>
-    <div class="col-md-5">
+    <div class="col-md-6" *ngIf="flag_camarote">
+      <label class="label">Camarote:</label>
+      <button class="btn" [ngClass]="{'btn-primary': camarote == 1,'btn-outline-primary': camarote != 1 }"
+        (click)="camarote = 1">Sim</button>
+      <button class="btn" [ngClass]="{'btn-danger': camarote == 0,'btn-outline-danger': camarote != 0 }"
+        (click)="camarote = 0">Não</button>
+    </div>
+    <div class="col-md-5" *ngIf="flag_alimento">
       <label class="label">Alimento:</label>
       <button class="btn" [ngClass]="{'btn-primary': alimento == 1,'btn-outline-primary': alimento != 1 }"
         (click)="alimento = 1">Sim</button>
       <button class="btn" [ngClass]="{'btn-danger': alimento == 0,'btn-outline-danger': alimento != 0 }"
         (click)="alimento = 0">Não</button>
     </div>
+    <!-- 
     <div class="col-md-7 input-group">
 
 
@@ -74,8 +110,9 @@
       <button class="btn" [ngClass]="{'btn-danger': combo == 0,'btn-outline-danger': combo != 0 }"
         (click)="combo = 0">Não</button>
 
-      <input type="text" class="form-control" *ngIf="combo == 1" placeholder="Número Ingresso" [(ngModel)]="numeroIngresso">
-    </div>
+      <input type="text" class="form-control" *ngIf="combo == 1" placeholder="Número Ingresso"
+        [(ngModel)]="numeroIngresso">
+    </div> -->
   </div>
   <div class="row" *ngIf="id_aluno || tipoVenda === 'convidado'">
     <div class="col-md-12">

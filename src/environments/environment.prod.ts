@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  url: 'http://caeem.br/vendas'
+  url: 'http://192.168.15.5/vendas'
 };

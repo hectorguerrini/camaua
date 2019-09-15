@@ -18,11 +18,10 @@ export class VendasService {
       )
     });
   }
-  getLista(id_festa: number, id_vendedor: number) {
+  getLista(id_festa: number) {
     const url = `${this.url}/get_lista`;
     var body = {
-      id_festa: id_festa,
-      id_vendedor: id_vendedor
+      id_festa: id_festa
     }
     return this.http.post(url, body, {
       headers: new HttpHeaders().set(
@@ -34,7 +33,7 @@ export class VendasService {
   updateVendaAluno(
       id_festa: number, id_vendedor: number, valor: number,
       sexo: string, alimento: number, id_aluno: number,
-      lote: number, combo: number, numeroIngresso: string
+      lote: number, combo: number, camarote: number
     ) {
     const url = `${this.url}/update_venda`;
     var body ={
@@ -46,7 +45,7 @@ export class VendasService {
       id_aluno: id_aluno,
       lote: lote,
       combo: combo,
-      numeroIngresso: numeroIngresso
+      camarote: camarote
     }
     return this.http.post(url, body, {
       headers: new HttpHeaders().set(
@@ -59,7 +58,7 @@ export class VendasService {
     id_festa: number, id_vendedor: number, valor: number,
     sexo: string, alimento: number, cpf: string,
     lote: number, combo: number, nome: string,
-    numeroIngresso: string
+    camarote: number
   ) {
   const url = `${this.url}/update_venda_convidado`;
   var body ={
@@ -72,7 +71,7 @@ export class VendasService {
     lote: lote,
     combo: combo,
     cpf: cpf,
-    numeroIngresso: numeroIngresso
+    camarote: camarote
   }
   return this.http.post(url, body, {
     headers: new HttpHeaders().set(
