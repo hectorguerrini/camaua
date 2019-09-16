@@ -14,19 +14,19 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
 
-    if(this.loginService.isLogged){
+    if (this.loginService.isLogged) {
       this.router.navigate([`vendas`]);
     }
   }
 
-  login(): void{
-    this.loginService.getLogin(this.user,this.senha)
+  login(): void {
+    this.loginService.getLogin(this.user, this.senha)
     .subscribe((data: {jsonRetorno: Array<any>}) => {
-      if(data.jsonRetorno.length > 0){
+      if (data.jsonRetorno.length > 0) {
         this.loginService.setLogged(true, data.jsonRetorno[0].nome, data.jsonRetorno[0].id);
         this.router.navigate([`vendas`]);
       }
-    })
+    });
 
   }
 }

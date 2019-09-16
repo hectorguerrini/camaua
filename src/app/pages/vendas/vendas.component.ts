@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { VendasService } from './vendas.service';
 import { LoginService } from '../login/login.service';
 import { Router } from '@angular/router';
-import { MatDialogConfig, MatDialog } from '@angular/material';
+import { MatDialogConfig, MatDialog } from '@angular/material/dialog';
 import { MessageComponent } from 'src/app/dialog/message/message.component';
 import { SystemComponent } from 'src/app/dialog/system/system.component';
 
