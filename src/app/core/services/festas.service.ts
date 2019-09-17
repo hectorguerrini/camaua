@@ -1,15 +1,17 @@
 import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+
 @Injectable({
   providedIn: 'root'
 })
-export class VendasService {
+export class FestasService {
+
   url = environment.url;
   constructor(private http: HttpClient) { }
 
-  getFesta() {
-    const url = `${this.url}/get_festa`;
+  getFesta(id_festa: number) {
+    const url = `${this.url}/get_festa/${id_festa}`;
 
     return this.http.post(url, {}, {
       headers: new HttpHeaders().set(
@@ -101,6 +103,16 @@ export class VendasService {
       id_festa: id_festa
     }
     return this.http.post(url, body, {
+      headers: new HttpHeaders().set(
+        'Content-Type',
+        'application/json'
+      )
+    });
+  }
+
+  getListaFestas() {
+    const url = `${this.url}/get_lista_festas`;    
+    return this.http.get(url, {
       headers: new HttpHeaders().set(
         'Content-Type',
         'application/json'

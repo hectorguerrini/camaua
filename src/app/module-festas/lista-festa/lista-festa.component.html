@@ -1,14 +1,17 @@
 <div class="lista">
-  <div class="festa" *ngFor="let item of [0,1,2,3,4]">
-    <h3>Festa {{item}}</h3>
+  <div class="festa" *ngFor="let item of listaFestas">
+    <h3>{{item.nome}}</h3>
     <div class="row">
-      <span class="col-md-2">Aluno: 100</span>
-      <span class="col-md-2">Convidado: 100</span>
-      <span class="col-md-2">1º Lote: 100</span>
-      <span class="col-md-2">2º Lote: 100</span>
-      <span class="col-md-2">3º Lote: 100</span>
+      <span class="col-md-2">Aluno: {{item.qtde_alunos}}</span>
+      <span class="col-md-3">Convidado: {{item.qtde_convidados}}</span>
+      <span class="col-md-2">Total: {{item.qtde_total}}</span>
+      <span class="col-md-2">1º Lote</span>
     </div>
-    <button class="btn btn-primary">Abrir Festa</button>
+    <div class="buttons">
+      <button class="btn btn-primary" (click)="abrirFesta(item)" *ngIf="item.ativo">Vendas</button>
+    </div>
+    
+
   </div>
 
 

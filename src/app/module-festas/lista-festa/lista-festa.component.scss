@@ -1,7 +1,7 @@
 .lista {
   box-shadow: 2px -1px 20px #888888;
   border-radius: 10px;
-  max-width: 70vw;
+  max-width: 80vw;
   width: 100%;
   margin: auto;
   margin-top: 1vh;
@@ -13,23 +13,30 @@
     flex-direction: row;
     width: 100%;
     flex-wrap: wrap;
-    padding: 1.2%;
+    padding: 1.2% 0;
     border-top: 1px solid #888888;
     border-bottom: 1px solid #888888;
     h3 {
-      width: 10%
+      width: 15%;
+      font-size: 18px;
     }
+
     .row {
       width: 70%;
-      span {
-        text-align: center;
+      span {        
         display: flex;
         align-items: center;
-        justify-content: center;
+        justify-content: left;
       }
     }
     :nth-child(n){
       margin: 0px 5px;
     }
+
+    .buttons{
+      width: 10%;
+      display: flex;
+    }
   }
+
 }

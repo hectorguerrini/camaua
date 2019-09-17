@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -12,6 +11,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import { SystemComponent } from './dialog/system/system.component';
 import { NavbarComponent } from './core/navbar/navbar.component';
 import { ModuleFestasModule } from './module-festas/module-festas.module';
+import { FormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,11 +22,11 @@ import { ModuleFestasModule } from './module-festas/module-festas.module';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
-    FormsModule,
+    AppRoutingModule,    
     HttpClientModule,
     BrowserAnimationsModule,
     MatDialogModule,
+    FormsModule,
     ModuleFestasModule
   ],
   providers: [],

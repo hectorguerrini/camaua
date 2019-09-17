@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { FestasService } from 'src/app/core/services/festas.service';
+import { ListaFesta } from 'src/app/models/listaFesta';
 
 @Component({
   selector: 'app-lista-festa',
@@ -7,9 +10,28 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListaFestaComponent implements OnInit {
 
-  constructor() { }
+  listaFestas: Array<ListaFesta>
+  constructor(
+    private router: Router,
+    private festasService: FestasService
+  ) { }
 
   ngOnInit() {
+    this.getListaFestas();
+  }
+  abrirFesta(id: number): void {
+    this.router.navigate([`festas/venda/${id}`]);
   }
 
+  getListaFestas(): void {
+    this.festasService.getListaFestas()
+      .subscribe((data: {jsonRetorno: Array<ListaFesta>}) => {
+        if(data.jsonRetorno.length > 0 ){
+          this.listaFestas = data.jsonRetorno;
+        } else {
+          this.listaFestas = [];
+        }
+      });
+
+  }
 }

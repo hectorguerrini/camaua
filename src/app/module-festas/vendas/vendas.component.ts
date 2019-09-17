@@ -1,11 +1,11 @@
 import { Component, OnInit } from "@angular/core";
-import { VendasService } from './vendas.service';
 
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { MatDialogConfig, MatDialog } from '@angular/material/dialog';
 import { MessageComponent } from 'src/app/dialog/message/message.component';
 import { SystemComponent } from 'src/app/dialog/system/system.component';
 import { LoginService } from 'src/app/pages/login/login.service';
+import { FestasService } from 'src/app/core/services/festas.service';
 
 @Component({
   selector: "app-vendas",
@@ -45,8 +45,17 @@ export class VendasComponent implements OnInit {
   nCombo: number;
   nAlimento: number;
   nConvite: number;
-  constructor(private vendasService: VendasService, private loginService: LoginService, private router: Router, public dialog: MatDialog) {
-    this.getFesta();
+  constructor(
+    private festasService: FestasService, 
+    private loginService: LoginService, 
+    private router: Router, 
+    private acRouter: ActivatedRoute,
+    public dialog: MatDialog
+  ) {
+    this.acRouter.paramMap.subscribe(params => {
+      this.getFesta(parseInt(params.get('id')));
+    });
+    
 
   }
 
@@ -60,7 +69,7 @@ export class VendasComponent implements OnInit {
 
   }
   getLista(): void{
-    this.vendasService.getLista(this.id_festa)
+    this.festasService.getLista(this.id_festa)
     .subscribe((data: {jsonRetorno: Array<any>}) => {
       if(data.jsonRetorno.length > 0 ){
         this.nLotes = [
@@ -86,8 +95,8 @@ export class VendasComponent implements OnInit {
     })
 
   }
-  getFesta(): void{
-    this.vendasService.getFesta()
+  getFesta(id_festa: number): void{
+    this.festasService.getFesta(id_festa)
     .subscribe((data: {jsonRetorno: Array<any>}) => {
       this.id_festa = data.jsonRetorno[0].id_festa;
       this.nomeFesta = data.jsonRetorno[0].nome;
@@ -98,7 +107,7 @@ export class VendasComponent implements OnInit {
   }
 
   getAluno(): void{
-    this.vendasService.getAluno(this.RA, this.id_festa)
+    this.festasService.getAluno(this.RA, this.id_festa)
     .subscribe((data: {jsonRetorno: Array<any>}) => {
       if(data.jsonRetorno.length > 0 ){
         if(data.jsonRetorno[0].id_aluno){
@@ -162,7 +171,7 @@ export class VendasComponent implements OnInit {
     }
     let valor = this.valorFinal();
     if(this.tipoVenda === 'aluno'){
-      this.vendasService.updateVendaAluno(
+      this.festasService.updateVendaAluno(
         this.id_festa, this.id_vendedor, valor, this.sexo,
         this.alimento, this.id_aluno, this.lote,
         this.combo, this.camarote
@@ -175,7 +184,7 @@ export class VendasComponent implements OnInit {
         }
       })
     } else if(this.tipoVenda === 'convidado'){
-      this.vendasService.updateVendaConvidado(
+      this.festasService.updateVendaConvidado(
         this.id_festa, this.id_vendedor, valor, this.sexo,
         this.alimento, this.CPF, this.lote,
         this.combo, this.nomeConvidado, this.camarote
