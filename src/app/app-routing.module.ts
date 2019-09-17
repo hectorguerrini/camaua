@@ -1,16 +1,19 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { VendasComponent } from './pages/vendas/vendas.component';
+
 import { LoginComponent } from './pages/login/login.component';
 
 const routes: Routes = [
-  { path: 'vendas', component: VendasComponent },
+  {
+    path: 'festas',
+    loadChildren: () => import('./module-festas/module-festas.module').then(mod => mod.ModuleFestasModule)
+  },
   { path: 'login', component: LoginComponent },
-  { path: '**', pathMatch: 'full', redirectTo: 'vendas' }
+  { path: '**', pathMatch: 'full', redirectTo: 'festas' }
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

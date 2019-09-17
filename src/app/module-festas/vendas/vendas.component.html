@@ -2,18 +2,14 @@
   <!-- <div class="row title">
     <label class="nome">{{nomeFesta}} - {{nomeVendedor}}</label>
   </div> -->
-  <div class="logout">
-    <button class="btn btn-light" (click)="signOut()">Logout</button>
-    
-  </div>
   <table class="table">
     <thead>
       <th>Lotes</th>
       <th class="text-center">Aluno Pista</th>
       <th class="text-center">Aluno Alimento</th>
       <th class="text-center">Convidado Pista</th>
-      <th class="text-center">Convidado Alimento</th>      
-      
+      <th class="text-center">Convidado Alimento</th>
+
     </thead>
     <tbody>
       <tr *ngFor="let item of nLotes">
@@ -21,8 +17,8 @@
         <td class="text-center">{{item.aluno_pista}}</td>
         <td class="text-center">{{item.aluno_alimento}}</td>
         <td class="text-center">{{item.convidado_pista}}</td>
-        <td class="text-center">{{item.convidado_alimento}}</td>                
-      </tr>      
+        <td class="text-center">{{item.convidado_alimento}}</td>
+      </tr>
     </tbody>
   </table>
   <!-- <div class="row">
@@ -54,7 +50,7 @@
           class="fa fa-search"></i></button>
       <button class="btn btn-outline-primary" (click)="CPF = cpfAnterior" *ngIf="tipoVenda === 'convidado' && cpfAnterior"><i
           class="fa fa-repeat"></i></button>
-        
+
     </div>
 
   </div>
@@ -100,7 +96,7 @@
       <button class="btn" [ngClass]="{'btn-danger': alimento == 0,'btn-outline-danger': alimento != 0 }"
         (click)="alimento = 0">Não</button>
     </div>
-    <!-- 
+    <!--
     <div class="col-md-7 input-group">
 
 

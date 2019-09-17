@@ -5,19 +5,20 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
-import { VendasComponent } from './pages/vendas/vendas.component';
 import { LoginComponent } from './pages/login/login.component';
 import { MessageComponent } from './dialog/message/message.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatDialogModule} from '@angular/material/dialog';
 import { SystemComponent } from './dialog/system/system.component';
+import { NavbarComponent } from './core/navbar/navbar.component';
+import { ModuleFestasModule } from './module-festas/module-festas.module';
 @NgModule({
   declarations: [
     AppComponent,
-    VendasComponent,
     LoginComponent,
     MessageComponent,
-    SystemComponent
+    SystemComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
@@ -25,7 +26,8 @@ import { SystemComponent } from './dialog/system/system.component';
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    MatDialogModule
+    MatDialogModule,
+    ModuleFestasModule
   ],
   providers: [],
   bootstrap: [AppComponent],

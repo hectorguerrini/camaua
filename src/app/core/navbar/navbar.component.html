@@ -1,0 +1,19 @@
+<div class="navbar">
+  <!-- <img src="assets/logo_branco_nfundo.png" alt="logo"> -->
+  <ul class="navbar-nav">
+    <li>
+      <span [routerLink]="'festas/venda'"><i class="fa fa-glass"></i>Festas</span>
+    </li>
+    <li>
+      <span><i class="fa fa-shopping-cart"></i>Produtos</span>
+    </li>
+  </ul>
+
+  <span  (click)="signOut()"><i class="fa fa-sign-out"></i>Logout</span>
+
+</div>
+
+
+<div class="main">
+  <router-outlet></router-outlet>
+</div>

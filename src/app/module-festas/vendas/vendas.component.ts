@@ -1,10 +1,11 @@
 import { Component, OnInit } from "@angular/core";
 import { VendasService } from './vendas.service';
-import { LoginService } from '../login/login.service';
+
 import { Router } from '@angular/router';
 import { MatDialogConfig, MatDialog } from '@angular/material/dialog';
 import { MessageComponent } from 'src/app/dialog/message/message.component';
 import { SystemComponent } from 'src/app/dialog/system/system.component';
+import { LoginService } from 'src/app/pages/login/login.service';
 
 @Component({
   selector: "app-vendas",
@@ -44,7 +45,7 @@ export class VendasComponent implements OnInit {
   nCombo: number;
   nAlimento: number;
   nConvite: number;
-  constructor(private vendasService: VendasService, private loginService: LoginService, private router: Router,public dialog: MatDialog) {
+  constructor(private vendasService: VendasService, private loginService: LoginService, private router: Router, public dialog: MatDialog) {
     this.getFesta();
 
   }
@@ -56,11 +57,6 @@ export class VendasComponent implements OnInit {
       this.id_vendedor = parseInt(this.loginService.idLogged);
       this.nomeVendedor = this.loginService.userLogged;
     }
-
-  }
-  signOut() {
-    this.loginService.setLogged(false, null, null);
-    this.router.navigate([`login`]);
 
   }
   getLista(): void{
@@ -76,13 +72,13 @@ export class VendasComponent implements OnInit {
           if(el.lote > 0){
             if(el.tipo == 'aluno'){
               this.nLotes[el.lote-1].aluno_pista = el.totalTipo-el.alimento;
-              this.nLotes[el.lote-1].aluno_alimento += el.alimento;              
+              this.nLotes[el.lote-1].aluno_alimento += el.alimento;
             } else if(el.tipo == 'convidado'){
               this.nLotes[el.lote-1].convidado_pista = el.totalTipo-el.alimento;
-              this.nLotes[el.lote-1].convidado_alimento += el.alimento;              
-            } 
+              this.nLotes[el.lote-1].convidado_alimento += el.alimento;
+            }
           }
-          
+
         })
 
       }
@@ -125,14 +121,14 @@ export class VendasComponent implements OnInit {
     dialogConfig.disableClose = false;
     dialogConfig.hasBackdrop = true;
     dialogConfig.autoFocus = true;
-    dialogConfig.width = '400px';    
+    dialogConfig.width = '400px';
     const dialogRef = this.dialog.open(SystemComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(result => {
 
     });
 
-  }  
+  }
 
   validarCampos(): Array<any>{
     let saida = []
@@ -163,7 +159,7 @@ export class VendasComponent implements OnInit {
     if(valCampos.length > 0){
       this.popup('error', `Verificar Seguintes Campos ${valCampos.join(', ')}`)
       return
-    }    
+    }
     let valor = this.valorFinal();
     if(this.tipoVenda === 'aluno'){
       this.vendasService.updateVendaAluno(
@@ -210,7 +206,7 @@ export class VendasComponent implements OnInit {
   zerarCampos(): void {
     this.cpfAnterior = this.CPF;
     this.RA = '';
-    this.CPF = '';    
+    this.CPF = '';
     this.sexo = '';
     this.lote = null;
     this.alimento = null;
