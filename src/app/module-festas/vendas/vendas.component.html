@@ -13,7 +13,7 @@
     </thead>
     <tbody>
       <tr *ngFor="let item of nLotes">
-        <td>{{item.lote}}º Lote</td>
+        <td>{{item.lote > 0 ? item.lote : 'Promo'}}º Lote</td>
         <td class="text-center">{{item.aluno_pista}}</td>
         <td class="text-center">{{item.aluno_alimento}}</td>
         <td class="text-center">{{item.convidado_pista}}</td>
@@ -70,12 +70,14 @@
     </div>
     <div class="col-md-5 btn-group">
       <label class="label">Lote:</label>
-      <button class="btn" [ngClass]="{'btn-primary': lote == 1,'btn-outline-primary': lote != 1 }" (click)="lote = 1">1°
+      <button *ngFor="let item of valores" [hidden]="tipoVenda !== item.tipo" class="btn" (click)="lote = item.lote"
+        [ngClass]="{'btn-primary': lote == item.lote,'btn-outline-primary': lote != item.lote }" >{{item.lote > 0 ? item.lote : 'Promo' }}° Lote</button>
+      <!-- <button class="btn" [ngClass]="{'btn-primary': lote == 1,'btn-outline-primary': lote != 1 }" (click)="lote = 1">1°
         Lote</button>
       <button class="btn" [ngClass]="{'btn-primary': lote == 2,'btn-outline-primary': lote != 2 }" (click)="lote = 2">2°
         Lote</button>
       <button class="btn" [ngClass]="{'btn-primary': lote == 3,'btn-outline-primary': lote != 3 }" (click)="lote = 3">3°
-        Lote</button>
+        Lote</button> -->
     </div>
   </div>
   <div class="row" *ngIf="id_aluno || tipoVenda === 'convidado'">

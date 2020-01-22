@@ -1,18 +1,46 @@
 <div class="lista">
-  <div class="festa" *ngFor="let item of listaFestas">
+  <table class="table">
+    <colgroup>
+      <col width="20%">
+      <col width="20%">
+      <col width="20%">
+      <col width="20%">
+      <col width="20%">
+    </colgroup>
+    <thead>
+      <tr>
+        <th>Nome Festa</th>
+        <th>Qtde Alunos</th>
+        <th>Qtde Convidados</th>
+        <th>Qtde Total</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of listaFestas">
+        <td>{{item.nome}}</td>
+        <td>{{item.qtde_alunos}}</td>
+        <td>{{item.qtde_convidados}}</td>
+        <td>{{item.qtde_total}}</td>
+        <td>
+            <button class="btn btn-primary" (click)="abrirFesta(item.id_festa)" *ngIf="item.ativo === 1">Vendas</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <!-- <div class="festa" *ngFor="let item of listaFestas">
     <h3>{{item.nome}}</h3>
     <div class="row">
-      <span class="col-md-2">Aluno: {{item.qtde_alunos}}</span>
-      <span class="col-md-3">Convidado: {{item.qtde_convidados}}</span>
-      <span class="col-md-2">Total: {{item.qtde_total}}</span>
-      <span class="col-md-2">1º Lote</span>
+      <span class="col-md-2">Aluno: </span>
+      <span class="col-md-3">Convidado: </span>
+      <span class="col-md-2">Total: </span>      
     </div>
     <div class="buttons">
-      <button class="btn btn-primary" (click)="abrirFesta(item)" *ngIf="item.ativo">Vendas</button>
+            
     </div>
     
 
-  </div>
+  </div> -->
 
 
 </div>

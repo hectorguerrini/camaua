@@ -4,6 +4,6 @@ export interface ListaFesta {
     qtde_alunos: number;
     qtde_convidados: number;
     qtde_total: number;
-    ativo: boolean;
+    ativo: number;
 
 }

@@ -10,10 +10,30 @@ export class FestasService {
   url = environment.url;
   constructor(private http: HttpClient) { }
 
+  getExcel(id_festa: number) {
+    const url = `${this.url}/excel/download/${id_festa}/all`;
+
+    return this.http.get(url, {
+      headers: new HttpHeaders().set(
+        'Content-Type',
+        'application/json'
+      )
+    });
+  }
+  getLotes(id_festa: number) {
+    const url = `${this.url}/get_lotes/${id_festa}`;
+
+    return this.http.get(url, {
+      headers: new HttpHeaders().set(
+        'Content-Type',
+        'application/json'
+      )
+    });
+  }
   getFesta(id_festa: number) {
     const url = `${this.url}/get_festa/${id_festa}`;
 
-    return this.http.post(url, {}, {
+    return this.http.get(url, {
       headers: new HttpHeaders().set(
         'Content-Type',
         'application/json'
