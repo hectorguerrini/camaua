@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit } from '@angular/core';
 
 import { Router, ActivatedRoute } from '@angular/router';
 import { MatDialogConfig, MatDialog } from '@angular/material/dialog';
@@ -9,12 +9,12 @@ import { FestasService } from 'src/app/core/services/festas.service';
 import { Lotes } from 'src/app/models/lotes';
 
 @Component({
-	selector: "app-vendas",
-	templateUrl: "./vendas.component.html",
-	styleUrls: ["./vendas.component.scss"]
+	selector: 'app-vendas',
+	templateUrl: './vendas.component.html',
+	styleUrls: ['./vendas.component.scss']
 })
 export class VendasComponent implements OnInit {
-	tipoVenda: string = "aluno";
+	tipoVenda: string = 'aluno';
 	RA: string;
 	CPF: string = '';
 	sexo: string;
@@ -22,7 +22,7 @@ export class VendasComponent implements OnInit {
 	alimento: number = null;
 	camarote: number = null;
 	combo: number = null;
-	numeroIngresso: string;
+	ingresso: string;
 	nome: string;
 	periodo: string;
 	id_festa: number;
@@ -81,7 +81,7 @@ export class VendasComponent implements OnInit {
 			.subscribe((data: { jsonRetorno: Array<any> }) => {
 				if (data.jsonRetorno.length > 0) {
 					this.nLotes = [];
-					// this.nLotes = [          
+					// this.nLotes = [
 					//   {lote:0,aluno_pista:0,aluno_alimento:0,convidado_pista:0,convidado_alimento:0},
 					//   {lote:1,aluno_pista:0,aluno_alimento:0,convidado_pista:0,convidado_alimento:0},
 					//   {lote:2,aluno_pista:0,aluno_alimento:0,convidado_pista:0,convidado_alimento:0},
@@ -106,7 +106,7 @@ export class VendasComponent implements OnInit {
 
 
 					// data.jsonRetorno.map(el => {
-					//   if(el.lote >= 0){                
+					//   if(el.lote >= 0){
 					//     if(el.tipo == 'aluno'){
 					//       this.nLotes[el.lote-1].aluno_pista = el.totalTipo-el.alimento;
 					//       this.nLotes[el.lote-1].aluno_alimento += el.alimento;
@@ -176,6 +176,8 @@ export class VendasComponent implements OnInit {
 				saida.push('Alimento')
 			if (this.sexo === '')
 				saida.push('Genero')
+			if (this.ingresso === '')
+				saida.push('Numero ingresso')
 		}
 		if (this.tipoVenda === 'convidado') {
 			if (!this.TestaCPF(this.CPF))
@@ -188,6 +190,8 @@ export class VendasComponent implements OnInit {
 				saida.push('Alimento')
 			if (this.sexo === '')
 				saida.push('Genero')
+			if (this.ingresso === '')
+				saida.push('Numero ingresso')
 		}
 		return saida;
 	}
@@ -202,7 +206,7 @@ export class VendasComponent implements OnInit {
 			this.festasService.updateVendaAluno(
 				this.id_festa, this.id_vendedor, valor, this.sexo,
 				this.alimento, this.id_aluno, this.lote,
-				this.combo, this.camarote
+				this.combo, this.camarote, this.ingresso
 			).subscribe((data: { jsonRetorno: Array<any> }) => {
 				if (data.jsonRetorno.length > 0) {
 					this.zerarCampos();
@@ -215,7 +219,7 @@ export class VendasComponent implements OnInit {
 			this.festasService.updateVendaConvidado(
 				this.id_festa, this.id_vendedor, valor, this.sexo,
 				this.alimento, this.CPF, this.lote,
-				this.combo, this.nomeConvidado, this.camarote
+				this.combo, this.nomeConvidado, this.camarote, this.ingresso
 			).subscribe((data: { jsonRetorno: Array<any> }) => {
 				if (data.jsonRetorno.length > 0) {
 					this.zerarCampos();
@@ -249,7 +253,7 @@ export class VendasComponent implements OnInit {
 		this.alimento = null;
 		this.combo = null;
 		this.camarote = null;
-		this.numeroIngresso = '';
+		this.ingresso = null;
 		this.nome = '';
 		this.periodo = '';
 		this.id_aluno = 0;
@@ -282,7 +286,7 @@ export class VendasComponent implements OnInit {
 		var Resto;
 		Soma = 0;
 		strCPF = strCPF.replace(/[^\d]+/g, '');
-		if (strCPF == "00000000000") return false;
+		if (strCPF == '00000000000') return false;
 
 		for (var i = 1; i <= 9; i++) Soma = Soma + parseInt(strCPF.substring(i - 1, i)) * (11 - i);
 		Resto = (Soma * 10) % 11;

@@ -8,6 +8,10 @@ const routes: Routes = [
     path: 'festas',
     loadChildren: () => import('./module-festas/module-festas.module').then(mod => mod.ModuleFestasModule)
   },
+  {
+    path: 'produtos',
+    loadChildren: () => import('./module-produtos/module-produtos.module').then(mod => mod.ModuleProdutosModule)
+  },
   { path: 'login', component: LoginComponent },
   { path: '**', pathMatch: 'full', redirectTo: 'festas' }
 ];

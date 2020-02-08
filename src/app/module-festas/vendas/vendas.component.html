@@ -13,7 +13,7 @@
     </thead>
     <tbody>
       <tr *ngFor="let item of nLotes">
-        <td>{{item.lote > 0 ? item.lote : 'Promo'}}º Lote</td>
+        <td>{{item.lote > 0 ? item.lote : 'Bixo'}}º Lote</td>
         <td class="text-center">{{item.aluno_pista}}</td>
         <td class="text-center">{{item.aluno_alimento}}</td>
         <td class="text-center">{{item.convidado_pista}}</td>
@@ -71,7 +71,7 @@
     <div class="col-md-5 btn-group">
       <label class="label">Lote:</label>
       <button *ngFor="let item of valores" [hidden]="tipoVenda !== item.tipo" class="btn" (click)="lote = item.lote"
-        [ngClass]="{'btn-primary': lote == item.lote,'btn-outline-primary': lote != item.lote }" >{{item.lote > 0 ? item.lote : 'Promo' }}° Lote</button>
+        [ngClass]="{'btn-primary': lote == item.lote,'btn-outline-primary': lote != item.lote }" >{{item.lote > 0 ? item.lote : 'Bixo' }}° Lote</button>
       <!-- <button class="btn" [ngClass]="{'btn-primary': lote == 1,'btn-outline-primary': lote != 1 }" (click)="lote = 1">1°
         Lote</button>
       <button class="btn" [ngClass]="{'btn-primary': lote == 2,'btn-outline-primary': lote != 2 }" (click)="lote = 2">2°
@@ -98,19 +98,19 @@
       <button class="btn" [ngClass]="{'btn-danger': alimento == 0,'btn-outline-danger': alimento != 0 }"
         (click)="alimento = 0">Não</button>
     </div>
-    <!--
-    <div class="col-md-7 input-group">
+    
+    <div class="col-md-4 input-group">
 
 
-      <label class="label">Combo:</label>
+      <!-- <label class="label">Combo:</label>
       <button class="btn" [ngClass]="{'btn-primary': combo == 1,'btn-outline-primary': combo != 1 }"
         (click)="combo = 1">Sim</button>
       <button class="btn" [ngClass]="{'btn-danger': combo == 0,'btn-outline-danger': combo != 0 }"
-        (click)="combo = 0">Não</button>
+        (click)="combo = 0">Não</button> -->
 
-      <input type="text" class="form-control" *ngIf="combo == 1" placeholder="Número Ingresso"
-        [(ngModel)]="numeroIngresso">
-    </div> -->
+      <input type="text" class="form-control" placeholder="Número Ingresso"
+        [(ngModel)]="ingresso">
+    </div>
   </div>
   <div class="row" *ngIf="id_aluno || tipoVenda === 'convidado'">
     <div class="col-md-12">
