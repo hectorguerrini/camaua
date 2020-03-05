@@ -22,7 +22,7 @@ export class VendasComponent implements OnInit {
 	alimento: number = null;
 	camarote: number = null;
 	combo: number = null;
-	ingresso: string;
+	ingresso: string = null;
 	nome: string;
 	periodo: string;
 	id_festa: number;
@@ -176,7 +176,7 @@ export class VendasComponent implements OnInit {
 				saida.push('Alimento')
 			if (this.sexo === '')
 				saida.push('Genero')
-			if (this.ingresso === '')
+			if (this.ingresso === '' || this.ingresso === null)
 				saida.push('Numero ingresso')
 		}
 		if (this.tipoVenda === 'convidado') {
@@ -190,7 +190,7 @@ export class VendasComponent implements OnInit {
 				saida.push('Alimento')
 			if (this.sexo === '')
 				saida.push('Genero')
-			if (this.ingresso === '')
+			if (this.ingresso === '' || this.ingresso === null)
 				saida.push('Numero ingresso')
 		}
 		return saida;

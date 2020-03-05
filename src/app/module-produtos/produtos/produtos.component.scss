@@ -2,9 +2,37 @@
 	width: 80%;
 	background-color: white;
 	margin: auto;
-	.teste {
-		width: 100px;
-		height: 100px;
-		background-color: gray;
+	.vitrine {
+		display: flex;		
+		flex-wrap: wrap;
+		.produto {
+			margin: 2% 4%;
+			flex: 0 0 25%;
+			max-width: 25%;
+			display: flex;
+			flex-wrap: wrap;
+			.tamanho {
+				
+				border: 1px solid #b7b7b7;
+				border-radius: 2px;
+				padding: 0 5px;
+				margin-right: 5px;
+				margin-bottom: 5px;
+				height: 2rem;
+				min-width: 2rem;
+				
+			}
+		}
 	}
+	.carrinho {
+		max-height: 900px;
+		.itens {
+			margin-bottom: 10px;
+		}
+		span {
+			display: block;
+			text-align: end;
+		}
+	}
+	
 }

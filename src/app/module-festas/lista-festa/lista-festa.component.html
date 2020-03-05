@@ -1,4 +1,5 @@
 <div class="lista">
+	
   <table class="table">
     <colgroup>
       <col width="20%">
@@ -23,7 +24,8 @@
         <td>{{item.qtde_convidados}}</td>
         <td>{{item.qtde_total}}</td>
         <td>
-            <button class="btn btn-primary" (click)="abrirFesta(item.id_festa)" *ngIf="item.ativo === 1">Vendas</button>
+			<button class="btn btn-primary" (click)="abrirFesta(item.id_festa)" *ngIf="item.ativo === 1">Vendas</button>			
+			<button class="btn btn-primary" (click)="getExcel(item.id_festa)">Excel</button>
         </td>
       </tr>
     </tbody>

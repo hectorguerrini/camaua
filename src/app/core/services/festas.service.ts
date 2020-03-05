@@ -141,4 +141,13 @@ export class FestasService {
 			)
 		});
 	}
+	getProdutos() {
+		const url = `${this.url}/get_produtos`;
+		return this.http.get(url, {
+			headers: new HttpHeaders().set(
+				'Content-Type',
+				'application/json'
+			)
+		});
+	}
 }
