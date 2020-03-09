@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { Carrinho } from 'src/app/models/produtos';
 
 @Injectable({
 	providedIn: 'root'
@@ -144,6 +145,15 @@ export class FestasService {
 	getProdutos() {
 		const url = `${this.url}/get_produtos`;
 		return this.http.get(url, {
+			headers: new HttpHeaders().set(
+				'Content-Type',
+				'application/json'
+			)
+		});
+	}
+	updateProdutos(carrinho: Array<Carrinho>) {
+		const url = `${this.url}/update_produto`;
+		return this.http.post(url, carrinho ,{
 			headers: new HttpHeaders().set(
 				'Content-Type',
 				'application/json'

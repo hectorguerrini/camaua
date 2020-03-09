@@ -1,20 +1,22 @@
 export class Itens {
 	id_produto: number;	
 	descricao: string;
-	tamanho: string;
+	tamanho: string;	
 	qtde: number;
 	dt_atualizacao: string;	
 }
 export class Loja {
 	nome_produto: string;
+	valor: number;
 	itens: Array<Itens>
 }
 export class Carrinho {
 	id_produto: number;
 	nome_produto: string;
+	descricao: string
 	qtde: number;
 	tamanho: string;
-	preco: number;
+	valor: number;
 }
 export class Produto {
 	produto: {

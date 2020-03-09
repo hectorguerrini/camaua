@@ -4,10 +4,10 @@
 			<mat-card class="produto" *ngFor="let produto of listaProdutos">				
 				<img mat-card-image src="https://via.placeholder.com/200" alt="Foto do produto">
 				<mat-card-content>
-					{{produto.nome_produto}}  {{100 | currency:'BRL'}}
+					{{produto.nome_produto}}  {{produto.valor | currency:'BRL'}}
 				</mat-card-content>
 				<mat-card-actions class="row">					
-					<button (click)="addCarrinho(produto.nome_produto, item)"
+					<button (click)="addCarrinho(produto.nome_produto,produto.valor, item)"
 						class="tamanho" *ngFor="let item of produto.itens">
 						{{item.tamanho}}
 					</button>
@@ -25,16 +25,14 @@
 					<ng-template ngFor let-produto [ngForOf]="carrinho" >
 						<div class="itens">
 							<span>{{produto.qtde}}X {{produto.nome_produto}}</span>
-							<span>Tamanho {{produto.tamanho}}</span>
-							<span>{{produto.preco | currency: 'BRL'}}</span>
+							<span>Tamanho {{produto.tamanho}}</span>			
+							<span>{{produto.valor | currency: 'BRL'}}</span>
 						</div>						
-					</ng-template>
-
-					
+					</ng-template>					
 				</mat-card-content>							
 				<mat-card-actions>
-					<span>Valor Total: {{300 | currency: 'BRL'}}</span>
-					<button class="btn btn-success">Vender</button>
+					<span>Valor Total: {{totalPagar | currency: 'BRL'}}</span>
+					<button (click)="vender()" class="btn btn-success">Vender</button>
 				</mat-card-actions>
 			</mat-card>
 		</div>
