@@ -56,7 +56,8 @@ export class FestasService {
 	updateVendaAluno(
 		id_festa: number, id_vendedor: number, valor: number,
 		sexo: string, alimento: number, id_aluno: number,
-		lote: number, combo: number, camarote: number, formado: number
+		lote: number, combo: number, camarote: number, formado: number,
+		formaPgto: string
 	) {
 		const url = `${this.url}/update_venda`;
 		var body = {
@@ -69,7 +70,8 @@ export class FestasService {
 			lote,
 			combo,
 			camarote,
-			formado
+			formado,
+			formaPgto
 		};
 		return this.http.post(url, body, {
 			headers: new HttpHeaders().set(
@@ -82,7 +84,7 @@ export class FestasService {
 		id_festa: number, id_vendedor: number, valor: number,
 		sexo: string, alimento: number, cpf: string,
 		lote: number, combo: number, nome: string,
-		camarote: number, formado: number
+		camarote: number, formado: number,formaPgto: string
 	) {
 		const url = `${this.url}/update_venda_convidado`;
 		let body = {
@@ -96,7 +98,8 @@ export class FestasService {
 			combo,
 			cpf,
 			camarote,
-			formado
+			formado,
+			formaPgto
 		};
 		return this.http.post(url, body, {
 			headers: new HttpHeaders().set(

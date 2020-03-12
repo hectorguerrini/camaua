@@ -24,6 +24,7 @@ export class VendasComponent implements OnInit {
 	formado: number = 0;
 	combo: number = null;
 	ingresso: string = null;
+	formaPgto: string = 'Dinheiro';
 	nome: string;
 	periodo: string;
 	id_festa: number;
@@ -209,7 +210,7 @@ export class VendasComponent implements OnInit {
 			this.festasService.updateVendaAluno(
 				this.id_festa, this.id_vendedor, valor, this.sexo,
 				this.alimento, this.id_aluno, this.lote,
-				this.combo, this.camarote, this.formado
+				this.combo, this.camarote, this.formado, this.formaPgto
 			).subscribe((data: { jsonRetorno: Array<any> }) => {
 				if (data.jsonRetorno.length > 0) {
 					this.zerarCampos();
@@ -222,7 +223,7 @@ export class VendasComponent implements OnInit {
 			this.festasService.updateVendaConvidado(
 				this.id_festa, this.id_vendedor, valor, this.sexo,
 				this.alimento, this.CPF, this.lote,
-				this.combo, this.nomeConvidado, this.camarote, this.formado
+				this.combo, this.nomeConvidado, this.camarote, this.formado, this.formaPgto
 			).subscribe((data: { jsonRetorno: Array<any> }) => {
 				if (data.jsonRetorno.length > 0) {
 					this.zerarCampos();
@@ -257,6 +258,7 @@ export class VendasComponent implements OnInit {
 		this.combo = null;
 		this.camarote = null;
 		this.ingresso = null;
+		this.formaPgto = 'Dinheiro';
 		this.nome = '';
 		this.periodo = '';
 		this.id_aluno = 0;
@@ -282,6 +284,9 @@ export class VendasComponent implements OnInit {
 			}
 			if (this.camarote) {
 				result += 60;
+			}
+			if(this.formaPgto !==  'Dinheiro') {
+				result = parseFloat((result * 1.1).toFixed(2));
 			}
 		}
 

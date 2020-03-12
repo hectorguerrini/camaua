@@ -103,7 +103,18 @@
 		<button class="btn" [ngClass]="{'btn-primary': formado == 1,'btn-outline-primary': formado != 1 }"
 		  (click)="formado = 1">Sim</button>
 		
-	  </div>
+	</div>
+	<div class="col-md-5">
+		<label class="label">Forma de Pagamento:</label>
+		<button class="btn" [ngClass]="{'btn-primary': formaPgto == 'Dinheiro','btn-outline-primary': formaPgto != 'Dinheiro' }"
+		  (click)="formaPgto = 'Dinheiro'">Dinheiro</button>
+		
+		<button class="btn" [ngClass]="{'btn-primary': formaPgto == 'Debito','btn-outline-primary': formaPgto != 'Debito' }"
+		  (click)="formaPgto = 'Debito'">Débito</button>
+
+		<button class="btn" [ngClass]="{'btn-primary': formaPgto == 'Credito','btn-outline-primary': formaPgto != 'Credito' }"
+		  (click)="formaPgto = 'Credito'">Crédito</button>
+	</div>
     <!-- <div class="col-md-4 input-group">
 
 
