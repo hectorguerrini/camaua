@@ -98,19 +98,24 @@
       <button class="btn" [ngClass]="{'btn-danger': alimento == 0,'btn-outline-danger': alimento != 0 }"
         (click)="alimento = 0">Não</button>
     </div>
-    
-    <div class="col-md-4 input-group">
+    <div class="col-md-5" *ngIf="flag_formado">
+		<label class="label">Formando:</label>
+		<button class="btn" [ngClass]="{'btn-primary': formado == 1,'btn-outline-primary': formado != 1 }"
+		  (click)="alimento = 1">Sim</button>
+		
+	  </div>
+    <!-- <div class="col-md-4 input-group">
 
 
-      <!-- <label class="label">Combo:</label>
+      <label class="label">Combo:</label>
       <button class="btn" [ngClass]="{'btn-primary': combo == 1,'btn-outline-primary': combo != 1 }"
         (click)="combo = 1">Sim</button>
       <button class="btn" [ngClass]="{'btn-danger': combo == 0,'btn-outline-danger': combo != 0 }"
-        (click)="combo = 0">Não</button> -->
+        (click)="combo = 0">Não</button>
 
       <input type="text" class="form-control" placeholder="Número Ingresso"
         [(ngModel)]="ingresso">
-    </div>
+    </div> -->
   </div>
   <div class="row" *ngIf="id_aluno || tipoVenda === 'convidado'">
     <div class="col-md-12">

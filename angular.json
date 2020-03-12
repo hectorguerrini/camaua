@@ -143,5 +143,8 @@
       }
     }
   },
-  "defaultProject": "camaua"
+  "defaultProject": "camaua",
+  "cli": {
+    "analytics": "d3c96751-4c80-4786-a428-913c03c0f1c1"
+  }
 }

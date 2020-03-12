@@ -34,7 +34,6 @@ import { ModuleProdutosModule } from './module-produtos/module-produtos.module';
 		ModuleProdutosModule
 	],
 	providers: [],
-	bootstrap: [AppComponent],
-	entryComponents: [MessageComponent, SystemComponent]
+	bootstrap: [AppComponent]
 })
 export class AppModule { }

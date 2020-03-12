@@ -4,15 +4,15 @@ export class Itens {
 	tamanho: string;	
 	qtde: number;
 	dt_atualizacao: string;	
+	valor: number;
 }
 export class Loja {
-	nome_produto: string;
+	descricao: string;
 	valor: number;
 	itens: Array<Itens>
 }
 export class Carrinho {
-	id_produto: number;
-	nome_produto: string;
+	id_produto: number;	
 	descricao: string
 	qtde: number;
 	tamanho: string;

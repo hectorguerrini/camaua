@@ -21,22 +21,19 @@ export class ProdutosComponent implements OnInit {
 	getProdutos(): void {
 		this.listaProdutos = [];			
 		this.festasService.getProdutos()
-			.subscribe((data: { jsonRetorno: Array<Carrinho> }) => {
+			.subscribe((data: { jsonRetorno: Array<Itens> }) => {
 				if(data.jsonRetorno.length > 0 ){
 					let lista = data.jsonRetorno;
-					lista.forEach(element => {
-						let nome = element.nome_produto + ' ' + element.descricao.split(' ')[4]
-						const i = this.listaProdutos.findIndex(el => el.nome_produto == nome);
-			
+					lista.forEach(element => {						
+						const i = this.listaProdutos.findIndex(el => el.descricao == element.descricao);			
 						if (i == -1) {
 							let obj = <Loja>{
-								nome_produto: element.nome_produto + ' ' + element.descricao.split(' ')[4],								
+								descricao: element.descricao,								
 								valor: element.valor,
 								itens: [
 									{ 
 										id_produto: element.id_produto,
-										tamanho: element.descricao.split(' ')[1],
-										descricao: element.descricao,
+										tamanho: element.tamanho,										
 										qtde: element.qtde
 									}
 								]
@@ -45,7 +42,7 @@ export class ProdutosComponent implements OnInit {
 						} else {
 							let obj = <Itens> {
 								id_produto: element.id_produto,
-								tamanho: element.descricao.split(' ')[1],
+								tamanho: element.tamanho,
 								descricao: element.descricao,
 								qtde: element.qtde
 							}
@@ -56,6 +53,7 @@ export class ProdutosComponent implements OnInit {
 				}
 
 			});
+		console.log(this.listaProdutos)
 	}
 	popup(status, message) {
 		const dialogConfig = new MatDialogConfig();
@@ -72,13 +70,12 @@ export class ProdutosComponent implements OnInit {
 		});
 
 	}
-	addCarrinho(nome_produto: string,valor: number, item: Itens){
+	addCarrinho(descricao: string,valor: number, item: Itens){
 		const i = this.carrinho.findIndex(el => el.id_produto == item.id_produto);
 		if (i == -1) {
 			this.carrinho.push({
-				id_produto: item.id_produto,
-				nome_produto: nome_produto, 
-				descricao: item.descricao,
+				id_produto: item.id_produto,				
+				descricao: descricao,
 				valor: valor,
 				qtde: 1,
 				tamanho: item.tamanho
@@ -89,6 +86,11 @@ export class ProdutosComponent implements OnInit {
 		}
 		
 		this.totalPagar += valor;
+	}
+	rmCarrinho(index: number, valor: number): void {
+		this.carrinho.splice(index,1);
+		this.totalPagar -= valor;
+
 	}
 	vender(){
 		

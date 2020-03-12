@@ -26,13 +26,21 @@
 	}
 	.carrinho {
 		max-height: 900px;
+		position: fixed;
+		width: 25%;
+		right: 20px;
 		.itens {
-			margin-bottom: 10px;
+			margin-bottom: 10px;			
+			i {
+				cursor: pointer;
+			}
 		}
+		
 		span {
+			
 			display: block;
 			text-align: end;
-		}
+		}		
 	}
 	
 }

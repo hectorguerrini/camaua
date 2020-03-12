@@ -1,0 +1,28 @@
+<div class="estoque">
+	<table class="table">
+		<colgroup>
+			<col width="40%">
+			<col width="20%">
+			<col width="20%">
+			<col width="20%">
+		</colgroup>
+		<thead>
+			<tr>
+				<th>Produto</th>
+				<th>Descrição</th>
+				<th>Quantidade</th>
+				<th><button mat-raised-button (click)="novoProduto()" color="primary" >Novo Produto</button></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr *ngFor="let item of listaProdutos">
+				<td>{{item.descricao}}</td>
+				<td>Tamanho {{item.tamanho}}</td>
+				<td>{{item.qtde}}</td>
+				<td>
+					<!-- <button mat-raised-button (click)="atualizarEstoque(item)" color="primary" >Atualizar</button> -->
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>

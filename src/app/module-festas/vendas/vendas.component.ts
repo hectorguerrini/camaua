@@ -21,6 +21,7 @@ export class VendasComponent implements OnInit {
 	lote: number;
 	alimento: number = null;
 	camarote: number = null;
+	formado: number = 0;
 	combo: number = null;
 	ingresso: string = null;
 	nome: string;
@@ -33,6 +34,7 @@ export class VendasComponent implements OnInit {
 	nomeVendedor: string;
 	flag_alimento: number = 0;
 	flag_camarote: number = 0;
+	flag_formado: number = 0;
 	valores: Array<Lotes>;
 	nLotes: Array<any>;
 	cpfAnterior: string;
@@ -130,6 +132,7 @@ export class VendasComponent implements OnInit {
 				this.nomeFesta = data.jsonRetorno[0].nome;
 				this.flag_alimento = data.jsonRetorno[0].flag_alimento;
 				this.flag_camarote = data.jsonRetorno[0].flag_camarote;
+				this.flag_formado = data.jsonRetorno[0].flag_formado;
 				this.getLista();
 			})
 	}
@@ -176,8 +179,8 @@ export class VendasComponent implements OnInit {
 				saida.push('Alimento')
 			if (this.sexo === '')
 				saida.push('Genero')
-			if (this.ingresso === '' || this.ingresso === null)
-				saida.push('Numero ingresso')
+			if (this.formado === null && this.flag_formado)
+				saida.push('Formando')
 		}
 		if (this.tipoVenda === 'convidado') {
 			if (!this.TestaCPF(this.CPF))
@@ -190,8 +193,8 @@ export class VendasComponent implements OnInit {
 				saida.push('Alimento')
 			if (this.sexo === '')
 				saida.push('Genero')
-			if (this.ingresso === '' || this.ingresso === null)
-				saida.push('Numero ingresso')
+			if (this.formado === null && this.flag_formado)
+				saida.push('Formando')
 		}
 		return saida;
 	}
@@ -206,7 +209,7 @@ export class VendasComponent implements OnInit {
 			this.festasService.updateVendaAluno(
 				this.id_festa, this.id_vendedor, valor, this.sexo,
 				this.alimento, this.id_aluno, this.lote,
-				this.combo, this.camarote, this.ingresso
+				this.combo, this.camarote, this.formado
 			).subscribe((data: { jsonRetorno: Array<any> }) => {
 				if (data.jsonRetorno.length > 0) {
 					this.zerarCampos();
@@ -219,7 +222,7 @@ export class VendasComponent implements OnInit {
 			this.festasService.updateVendaConvidado(
 				this.id_festa, this.id_vendedor, valor, this.sexo,
 				this.alimento, this.CPF, this.lote,
-				this.combo, this.nomeConvidado, this.camarote, this.ingresso
+				this.combo, this.nomeConvidado, this.camarote, this.formado
 			).subscribe((data: { jsonRetorno: Array<any> }) => {
 				if (data.jsonRetorno.length > 0) {
 					this.zerarCampos();
@@ -257,6 +260,7 @@ export class VendasComponent implements OnInit {
 		this.nome = '';
 		this.periodo = '';
 		this.id_aluno = 0;
+		this.formado = 0;
 		this.nomeConvidado = '';
 		this.getLista();
 	}
@@ -268,6 +272,9 @@ export class VendasComponent implements OnInit {
 		if (valor) {
 			result = valor.valor;
 			if (this.alimento) {
+				result -= 5;
+			}
+			if (this.formado) {
 				result -= 5;
 			}
 			if (this.combo) {
