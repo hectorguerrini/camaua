@@ -12,6 +12,10 @@ const routes: Routes = [
     path: 'produtos',
     loadChildren: () => import('./module-produtos/module-produtos.module').then(mod => mod.ModuleProdutosModule)
   },
+  {
+    path: 'financeiro',
+    loadChildren: () => import('./module-financeiro/module-financeiro.module').then(mod => mod.ModuleFinanceiroModule)
+  },
   { path: 'login', component: LoginComponent },
   { path: '**', pathMatch: 'full', redirectTo: 'festas' }
 ];

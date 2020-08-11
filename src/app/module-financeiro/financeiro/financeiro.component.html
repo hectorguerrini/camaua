@@ -1,0 +1,56 @@
+<div class="financeiro">
+	<div class="row">
+		<mat-card class="col-md-4 ">
+			<mat-card-title>RedBull</mat-card-title>
+			<mat-card-subtitle>Receita dia/mes</mat-card-subtitle>
+			<mat-card-content>
+				<span class="day">{{50 | currency:'BRL'}}</span>
+				<span class="month">/{{180 | currency:'BRL'}}</span>
+			</mat-card-content>
+		</mat-card>			
+		<mat-card class="col-md-4 ">
+			<mat-card-title>Vestuario</mat-card-title>
+			<mat-card-subtitle>Receita dia/mes</mat-card-subtitle>
+			<mat-card-content>
+				<span class="day">{{120 | currency:'BRL'}}</span>
+				<span class="month">/{{600 | currency:'BRL'}}</span>
+			</mat-card-content>
+		</mat-card>			
+	</div>
+	<div class="row">
+		
+	<table class="table">
+		<colgroup>
+			<col width="30%">
+			<col width="20%">
+			<col width="10%">
+			<col width="20%">
+			<col width="20%">
+		</colgroup>
+		<thead>
+			<tr>
+				<th>Produto</th>
+				<th>Tamanho</th>
+				<th>Quantidade</th>				
+				<th>Valor</th>
+				<th>Colab.</th>
+			</tr>
+		</thead>
+		<tbody>
+			<ng-template ngFor let-venda [ngForOf]="listaVendas" let-index="index">
+				<tr *ngFor="let item of venda.carrinho">
+					<td>{{item.descricao}}</td>
+					<td>{{item.tamanho}}</td>
+					<td>{{item.qtde}}</td>
+					<td>
+						{{item.valor | currency: 'BRL'}}
+					</td>
+					<td>{{venda.colaborador != '' ? venda.colaborador : '-'}}</td>
+				</tr>			
+			</ng-template>			
+			
+		</tbody>
+	</table>
+	</div>
+
+</div>

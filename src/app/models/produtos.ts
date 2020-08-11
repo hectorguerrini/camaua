@@ -18,6 +18,13 @@ export class Carrinho {
 	tamanho: string;
 	valor: number;
 }
+export class Venda {
+	carrinho: Array<Carrinho> = [];
+	idVenda: number;
+	valorTotal: number = 0;
+	colaborador: string = '';
+	
+}
 export class Produto {
 	produto: {
 		jsonRetorno: Array<any>

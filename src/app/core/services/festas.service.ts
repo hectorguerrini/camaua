@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { Carrinho, Itens } from 'src/app/models/produtos';
+import { Carrinho, Itens, Venda } from 'src/app/models/produtos';
 
 @Injectable({
 	providedIn: 'root'
@@ -146,30 +146,71 @@ export class FestasService {
 		});
 	}
 	getProdutos() {
-		const url = `${this.url}/get_produtos`;
-		return this.http.get(url, {
-			headers: new HttpHeaders().set(
-				'Content-Type',
-				'application/json'
-			)
-		});
+		return JSON.parse(localStorage.getItem('produtos'));
+		// const url = `${this.url}/get_produtos`;
+		// return this.http.get(url, {
+		// 	headers: new HttpHeaders().set(
+		// 		'Content-Type',
+		// 		'application/json'
+		// 	)
+		// });
 	}
-	updateProdutos(carrinho: Array<Carrinho>) {
-		const url = `${this.url}/update_produto`;
-		return this.http.post(url, carrinho ,{
-			headers: new HttpHeaders().set(
-				'Content-Type',
-				'application/json'
-			)
+	updateProdutos(venda: Venda) {
+		let lista:Array<Itens> = JSON.parse(localStorage.getItem('produtos'));
+		let vendas:Array<Venda> = JSON.parse(localStorage.getItem('vendas'));
+		if (vendas == null )
+			vendas = [];
+		venda.carrinho.forEach(c => {
+			lista = lista.map(e => {
+				if (c.id_produto === e.id_produto) {
+					e.qtde -= c.qtde;
+				}
+				return e;
+			});			
 		});
+		venda.idVenda = vendas.length + 1;
+		vendas.push(venda);
+		localStorage.setItem('produtos', JSON.stringify(lista));
+		localStorage.setItem('vendas', JSON.stringify(vendas));
+		// const url = `${this.url}/update_produto`;
+		// return this.http.post(url, carrinho ,{
+		// 	headers: new HttpHeaders().set(
+		// 		'Content-Type',
+		// 		'application/json'
+		// 	)
+		// });
+	}
+	updateEstoque(item: Itens) {
+		let lista:Array<Itens> = JSON.parse(localStorage.getItem('produtos'));
+		lista = lista.map(e => {
+			if(e.id_produto == item.id_produto){
+				e = item;
+			}
+			return e;
+		});
+		console.log(lista);
+		localStorage.setItem('produtos', JSON.stringify(lista));
 	}
 	novoProduto(item: Itens) {
-		const url = `${this.url}/novo_produto`;
-		return this.http.post(url, item ,{
-			headers: new HttpHeaders().set(
-				'Content-Type',
-				'application/json'
-			)
-		});
+		let lista = JSON.parse(localStorage.getItem('produtos'));
+		if (lista == null )
+			lista = [];
+		item.id_produto = lista.length + 1;
+		lista.push(item);
+		localStorage.setItem('produtos', JSON.stringify(lista));
+
+		// const url = `${this.url}/novo_produto`;
+		// return this.http.post(url, item ,{
+		// 	headers: new HttpHeaders().set(
+		// 		'Content-Type',
+		// 		'application/json'
+		// 	)
+		// });
+	}
+	getVendas() {
+		let vendas:Array<Venda> = JSON.parse(localStorage.getItem('vendas'));
+		if (vendas == null )
+			vendas = [];
+		return vendas;
 	}
 }

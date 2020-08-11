@@ -20,13 +20,14 @@ export class EstoqueComponent implements OnInit {
 	}
 	getProdutos(): void {
 		this.listaProdutos = [];			
-		this.festasService.getProdutos()
-			.subscribe((data: { jsonRetorno: Array<Itens> }) => {
-				if(data.jsonRetorno.length > 0 ){
-					this.listaProdutos = data.jsonRetorno;
+		this.listaProdutos = this.festasService.getProdutos();
+		
+			// .subscribe((data: { jsonRetorno: Array<Itens> }) => {
+			// 	if(data.jsonRetorno.length > 0 ){
+			// 		this.listaProdutos = data.jsonRetorno;
 					
-				}
-			});
+			// 	}
+			// });
 	}
 	atualizarEstoque(produto: Itens): void {
 		const dialogConfig = new MatDialogConfig();
@@ -39,7 +40,9 @@ export class EstoqueComponent implements OnInit {
 		const dialogRef = this.dialog.open(AtualizacaoEstoqueComponent, dialogConfig);
 
 		dialogRef.afterClosed().subscribe(result => {
-			if(result) {}
+			if(result) {
+				this.festasService.updateEstoque(result);
+			}
 		});
 	}
 	novoProduto(): void {
@@ -73,15 +76,16 @@ export class EstoqueComponent implements OnInit {
 		});
 
 	}
-	salvarProduto(produto: Itens): void {
-		this.festasService.novoProduto(produto)
-			.subscribe((data: { jsonRetorno: Array<Itens> }) => {
-				if (data.jsonRetorno.length > 0) {
-					this.popup('success', 'Venda Finalizada com sucesso');
-					this.getProdutos();
-				} else {
-					this.popup('error', 'Erro');
-				}
-			});
+	salvarProduto(produto: Itens): void {		
+		this.festasService.novoProduto(produto);
+		this.getProdutos();
+			// .subscribe((data: { jsonRetorno: Array<Itens> }) => {
+			// 	if (data.jsonRetorno.length > 0) {
+			// 		this.popup('success', 'Venda Finalizada com sucesso');
+			// 		this.getProdutos();
+			// 	} else {
+			// 		this.popup('error', 'Erro');
+			// 	}
+			// });
 	}
 }

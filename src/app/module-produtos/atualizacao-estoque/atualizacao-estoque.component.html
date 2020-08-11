@@ -1,22 +1,26 @@
 <h4 mat-dialog-title>{{data.descricao || "Novo Produto"}}</h4>
-<div mat-dialog-content [hidden]="data.id_produto">
+<div mat-dialog-content >
 	<mat-form-field>
 		<mat-label>Nome do produto</mat-label>
-		<input matInput [(ngModel)]="data.descricao">
+		<input matInput [(ngModel)]="data.descricao" [disabled]="modoEdit">
 	</mat-form-field>
 	<br>
 	<mat-form-field>
 		<mat-label>Tamanho</mat-label>
-		<input matInput [(ngModel)]="data.tamanho">
+		<input matInput [(ngModel)]="data.tamanho" [disabled]="modoEdit">
 	</mat-form-field>
 	<br>
 	<mat-form-field>
-		<mat-label>Quantidade inicial</mat-label>
-		<input matInput [(ngModel)]="data.qtde">
+		<mat-label>Quantidade {{modoEdit ? 'Atual' : 'Inicial'}}</mat-label>
+		<input matInput [(ngModel)]="data.qtde" [disabled]="modoEdit">
 	</mat-form-field>
 	<mat-form-field>
 		<mat-label>Valor</mat-label>
 		<input matInput [(ngModel)]="data.valor">
+	</mat-form-field>
+	<mat-form-field *ngIf="modoEdit">
+		<mat-label>Qtde Comprado</mat-label>
+		<input matInput [(ngModel)]="qtdeN">
 	</mat-form-field>
 </div>
 <div mat-dialog-actions>

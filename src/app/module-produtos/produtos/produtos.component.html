@@ -2,7 +2,7 @@
 	<div class="row">
 		<div class="col-md-8 vitrine">
 			<mat-card class="produto" *ngFor="let produto of listaProdutos">				
-				<img mat-card-image src="https://via.placeholder.com/200" alt="Foto do produto">
+				<img mat-card-image src="{{produto.descricao == 'Redbull' ? 'assets/redbull.png' : 'https://via.placeholder.com/200'}}" alt="Foto do produto">
 				<mat-card-content>
 					{{produto.descricao}}  {{produto.valor | currency:'BRL'}}
 				</mat-card-content>
@@ -31,9 +31,21 @@
 						</div>						
 					</ng-template>					
 				</mat-card-content>							
-				<mat-card-actions>
-					<span>Valor Total: {{totalPagar | currency: 'BRL'}}</span>
-					<!-- <button (click)="vender()" class="btn btn-success">Vender</button> -->
+				<mat-card-actions [hidden]="carrinho.length == 0">
+					<span>Valor Total: {{venda.colaborador != '' ? 0 :venda.valorTotal | currency: 'BRL'}}</span>
+					{{venda.colaborador}}
+					<div class="text-right">
+						
+						<mat-form-field appearance="fill">
+							<mat-label>Colaborador?</mat-label>
+							<mat-select [(value)]="venda.colaborador">
+								<mat-option *ngFor="let item of colaboradores" [value]="item" >
+									{{item}}
+								  </mat-option>
+							</mat-select>
+						</mat-form-field>
+					</div>
+					<button (click)="vender()" class="btn btn-success" [disabled]="carrinho.length == 0">Vender</button>
 				</mat-card-actions>
 			</mat-card>
 		<!-- </div> -->

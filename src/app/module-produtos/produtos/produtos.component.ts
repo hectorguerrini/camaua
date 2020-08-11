@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FestasService } from 'src/app/core/services/festas.service';
-import { Produto, Loja, Itens, Carrinho } from 'src/app/models/produtos';
+import { Produto, Loja, Itens, Carrinho, Venda } from 'src/app/models/produtos';
 import { MatDialogConfig, MatDialog } from '@angular/material/dialog';
 import { MessageComponent } from 'src/app/dialog/message/message.component';
 
@@ -12,7 +12,12 @@ import { MessageComponent } from 'src/app/dialog/message/message.component';
 export class ProdutosComponent implements OnInit {
 	listaProdutos: Array<Loja>;
 	carrinho: Array<Carrinho> = [];
-	totalPagar = 0;
+	
+	colaboradores: Array<string> = [
+		'Gerry', 'Cepacol', 'Paraiba', 'Ronaldo', 'Jamaica'
+	];
+	venda: Venda = new Venda();
+
 	constructor(private festasService: FestasService, private dialog: MatDialog) { }
 
 	ngOnInit() {
@@ -20,40 +25,44 @@ export class ProdutosComponent implements OnInit {
 	}
 	getProdutos(): void {
 		this.listaProdutos = [];			
-		this.festasService.getProdutos()
-			.subscribe((data: { jsonRetorno: Array<Itens> }) => {
-				if(data.jsonRetorno.length > 0 ){
-					let lista = data.jsonRetorno;
-					lista.forEach(element => {						
-						const i = this.listaProdutos.findIndex(el => el.descricao == element.descricao);			
-						if (i == -1) {
-							let obj = <Loja>{
-								descricao: element.descricao,								
-								valor: element.valor,
-								itens: [
-									{ 
-										id_produto: element.id_produto,
-										tamanho: element.tamanho,										
-										qtde: element.qtde
-									}
-								]
-							}
-							this.listaProdutos.push(obj);
-						} else {
-							let obj = <Itens> {
-								id_produto: element.id_produto,
-								tamanho: element.tamanho,
-								descricao: element.descricao,
-								qtde: element.qtde
-							}
-							this.listaProdutos[i].itens.push(obj);
-						}
-						
-					});
-				}
+		this.gerarTela(this.festasService.getProdutos());
+			// .subscribe((data: { jsonRetorno: Array<Itens> }) => {
+			// 	if(data.jsonRetorno.length > 0 ){
+			// 		let lista = data.jsonRetorno;
+					
+			// 	}
 
-			});
-		console.log(this.listaProdutos)
+			// });
+		console.log(this.listaProdutos);
+	}
+
+	gerarTela(lista: Array<Itens>) {
+		lista.forEach(element => {						
+			const i = this.listaProdutos.findIndex(el => el.descricao == element.descricao);			
+			if (i == -1) {
+				let obj = <Loja>{
+					descricao: element.descricao,								
+					valor: element.valor,
+					itens: [
+						{ 
+							id_produto: element.id_produto,
+							tamanho: element.tamanho,										
+							qtde: element.qtde
+						}
+					]
+				}
+				this.listaProdutos.push(obj);
+			} else {
+				let obj = <Itens> {
+					id_produto: element.id_produto,
+					tamanho: element.tamanho,
+					descricao: element.descricao,
+					qtde: element.qtde
+				}
+				this.listaProdutos[i].itens.push(obj);
+			}
+			
+		});
 	}
 	popup(status, message) {
 		const dialogConfig = new MatDialogConfig();
@@ -85,24 +94,31 @@ export class ProdutosComponent implements OnInit {
 			this.carrinho[i].valor += valor;
 		}
 		
-		this.totalPagar += valor;
+		this.venda.valorTotal += valor;
 	}
 	rmCarrinho(index: number, valor: number): void {
-		this.carrinho.splice(index,1);
-		this.totalPagar -= valor;
+		this.carrinho.splice(index, 1);
+		this.venda.valorTotal -= valor;
 
 	}
 	vender(){
-		
-		this.festasService.updateProdutos(this.carrinho)
-			.subscribe((data: { jsonRetorno: Array<Carrinho> }) => {
-				if (data.jsonRetorno.length > 0){
-					this.popup('success', 'Venda Finalizada com sucesso');
-					this.getProdutos();
-				} else {
-					this.popup('error', `Erro`)
-				}
-			})
+		console.log(this.carrinho);
+		this.venda.carrinho = this.carrinho;
+		if (this.venda.colaborador != ''){
+			this.venda.valorTotal = 0;
+		}
+		console.log(this.venda);
+		this.festasService.updateProdutos(this.venda);
+		this.popup('success', 'Venda Finalizada com sucesso');
+		this.venda = new Venda();
+			// .subscribe((data: { jsonRetorno: Array<Carrinho> }) => {
+			// 	if (data.jsonRetorno.length > 0){
+			// 		this.popup('success', 'Venda Finalizada com sucesso');
+			// 		this.getProdutos();
+			// 	} else {
+			// 		this.popup('error', `Erro`)
+			// 	}
+			// })
 		
 	}
 }
